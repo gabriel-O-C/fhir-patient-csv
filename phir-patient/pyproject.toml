@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "phir-patient"
+version = "0.1.0"
+description = ""
+authors = ["gabriel chaves <gabrieloliveirachaves754@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.114.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
