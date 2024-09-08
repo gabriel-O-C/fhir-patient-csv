@@ -4,6 +4,8 @@ from io import StringIO
 
 from fastapi import APIRouter, File, HTTPException, UploadFile
 
+from src.patients.service import proccess_patient
+
 router = APIRouter(prefix='/api/v1', tags=['patients'])
 
 
@@ -21,6 +23,11 @@ def parse_csv(file: UploadFile):
         csv_data = StringIO(decoded_content)
         csv_reader = csv.DictReader(csv_data)
         patients_list = [row for row in csv_reader]
+
+        patients_parsed = [
+            proccess_patient(patient)
+            for patient in patients_list
+        ]
         return patients_list
 
     except Exception as e:
