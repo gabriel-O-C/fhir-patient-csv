@@ -3,6 +3,13 @@ from io import BytesIO
 
 from fastapi import UploadFile
 
+csv_data_str = (
+    'Nome,CPF,Gênero,Data de Nascimento,Telefone,País de Nascimento,Observação\n'
+    'João da Silva,123.456.789-00,Masculino,10/05/1980,(11) 1234-5678,Brasil,\n'
+)
+
+csv_data_bytes = csv_data_str.encode('latin-1')
+
 
 def make_request(file: UploadFile, client):
     response = client.post(
@@ -22,7 +29,7 @@ def create_upload_file(content: bytes, filename='test.csv'):
 
 
 def test_create_patients_success(client):
-    file = create_upload_file(b'name,age\nJohn,30\nDoe,25')
+    file = create_upload_file(csv_data_bytes)
 
     response = make_request(file, client)
 
@@ -30,8 +37,15 @@ def test_create_patients_success(client):
     assert response.json() == {
         'message': 'Successfully created patients',
         'patients': [
-            {'name': 'John', 'age': '30'},
-            {'name': 'Doe', 'age': '25'},
+            {
+                'Nome': 'João da Silva',
+                'CPF': '123.456.789-00',
+                'Gênero': 'Masculino',
+                'Data de Nascimento': '10/05/1980',
+                'Telefone': '(11) 1234-5678',
+                'País de Nascimento': 'Brasil',
+                'Observação': '',
+            },
         ],
     }
 
