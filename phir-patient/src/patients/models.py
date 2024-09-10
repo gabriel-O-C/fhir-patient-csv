@@ -6,7 +6,7 @@ from fhirclient.models.fhirreference import FHIRReference
 from fhirclient.models.observation import Observation
 
 
-async def create_diabetes_condition(patient_id: str) -> Condition:
+def create_diabetes_condition(patient_id: str) -> Condition:
     """Create a FHIR Condition resource for diabetes."""
     condition = Condition()
     condition.code = CodeableConcept({
@@ -22,7 +22,7 @@ async def create_diabetes_condition(patient_id: str) -> Condition:
     return condition
 
 
-async def create_hypertension_condition(patient_id: str) -> Condition:
+def create_hypertension_condition(patient_id: str) -> Condition:
     """Create a FHIR Condition resource for hypertension."""
     condition = Condition()
     condition.code = CodeableConcept({
@@ -38,7 +38,7 @@ async def create_hypertension_condition(patient_id: str) -> Condition:
     return condition
 
 
-async def create_pregnancy_observation(patient_id: str) -> Observation:
+def create_pregnancy_observation(patient_id: str) -> Observation:
     """Create a FHIR Observation resource for pregnancy."""
     observation = Observation()
     observation.code = CodeableConcept({
