@@ -6,7 +6,7 @@ from typing import Dict, List
 
 from fastapi import APIRouter, File, HTTPException, UploadFile
 
-from src.patients.service import process_patient
+from .service import process_patient
 
 router = APIRouter(prefix='/api/v1', tags=['patients'])
 

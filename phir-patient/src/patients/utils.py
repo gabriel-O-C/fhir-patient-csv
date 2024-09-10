@@ -2,13 +2,13 @@
 
 from typing import List, Tuple
 
-from src.patients.mappings import (
+from .mappings import (
     format_birth_date,
     format_phone_number,
     map_gender,
 )
-from src.patients.schema import PatientCsv, key_mapping
-from src.patients.settings import BRAZILIAN_CPF_SYSTEM
+from .schema import PatientCsv, key_mapping
+from .settings import BRAZILIAN_CPF_SYSTEM
 
 
 def split_name(name: str) -> Tuple[List[str], str]:

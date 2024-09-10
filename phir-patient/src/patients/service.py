@@ -7,13 +7,13 @@ from fhirclient.models.fhirreference import FHIRReference
 from fhirclient.models.observation import Observation
 from fhirclient.models.patient import Patient
 
-from src.patients.fhir_client import fhir_client
-from src.patients.models import (
+from .fhir_client import fhir_client
+from .models import (
     create_diabetes_condition,
     create_hypertension_condition,
     create_pregnancy_observation,
 )
-from src.patients.utils import normalize_patient, patient_csv_to_json
+from .utils import normalize_patient, patient_csv_to_json
 
 
 async def map_to_fhir_patient_from_json(patient_csv) -> Patient:

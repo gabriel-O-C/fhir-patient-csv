@@ -5,7 +5,7 @@ from datetime import datetime
 
 from fhirclient.models.fhirdate import FHIRDate
 
-from src.patients.settings import GENDER_MAP
+from .settings import GENDER_MAP
 
 
 def map_gender(gender: str) -> str:

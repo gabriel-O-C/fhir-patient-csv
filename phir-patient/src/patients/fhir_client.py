@@ -2,6 +2,6 @@
 
 from fhirclient import client
 
-from src.patients.settings import SETTINGS
+from .settings import SETTINGS
 
 fhir_client = client.FHIRClient(SETTINGS)
