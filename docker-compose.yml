@@ -1,21 +1,22 @@
-version: '3.7'
-
 services:
   fhir:
     container_name: fhir
     image: "hapiproject/hapi:latest"
     ports:
       - "8080:8080"
+    networks:
+      - mynetwork
     configs:
       - source: hapi
         target: /app/config/application.yaml
     depends_on:
       - db
 
-
   db:
-    image: postgres
+    image: postgres:15
     restart: always
+    networks:
+      - mynetwork
     environment:
       POSTGRES_PASSWORD: admin
       POSTGRES_USER: admin
@@ -23,6 +24,23 @@ services:
     volumes:
       - ./hapi.postgress.data:/var/lib/postgresql/data
 
+  fastapi:
+    build:
+      context: ./phir-patient
+    container_name: fastapi
+    ports:
+      - "8000:8000"
+    networks:
+      - mynetwork
+    volumes:
+      - ./phir-patient:/app
+    depends_on:
+      - fhir
+
+networks:
+  mynetwork:
+    driver: bridge
+
 configs:
   hapi:
-     file: ./hapi.application.yaml
+    file: ./hapi.application.yaml
